@@ -8,4 +8,5 @@ public interface EmployeeDao {
 
 	public List<Employee> findAll();
 	public Employee findById();
+	public String deleteById();
 }
