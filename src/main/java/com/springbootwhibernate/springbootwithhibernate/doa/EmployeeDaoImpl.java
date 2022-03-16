@@ -3,34 +3,38 @@ package com.springbootwhibernate.springbootwithhibernate.doa;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-
-import org.hibernate.Query;
 import org.hibernate.Session;
-
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.springbootwhibernate.springbootwithhibernate.entity.Employee;
+
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
 	private EntityManager entityManager;
-	
+
 	@Autowired
-	public  EmployeeDaoImpl(EntityManager theEntitymanager) {
-		entityManager=theEntitymanager;
+	public EmployeeDaoImpl(EntityManager theEntitymanager) {
+		entityManager = theEntitymanager;
 	}
+
 	@Override
-	@Transactional
 	public List<Employee> findAll() {
-		//get current hibernate Seeion
+		// get current hibernate Session
 		Session se = entityManager.unwrap(Session.class);
-		//Create Query
-		Query<Employee> query = se.createQuery("From Employee" ,Employee.class);
-		//Excute query And get the result
+		// Create Query
+		Query<Employee> query = se.createQuery("From Employee", Employee.class);
+		// Execute query And get the result
 		List<Employee> employees = query.getResultList();
 		return employees;
+	}
+
+	@Override
+	public Employee findById(int theId) {
+		Session se = entityManager.unwrap(Session.class);
+		Employee employee = se.get(Employee.class, theId);
+		return employee;
 	}
 
 }
