@@ -9,4 +9,7 @@ public interface EmployeeService {
 
 	public Employee findById(int theId);
 
+	public void saveEmp(Employee theEmployee);
+	public void deleteEmp(int theId);
+
 }

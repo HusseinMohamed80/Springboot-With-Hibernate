@@ -34,4 +34,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return empDao.findById(theId);
 	}
 
+	@Override
+	@Transactional
+	public void saveEmp(Employee theEmployee) {
+		empDao.saveEmp(theEmployee);
+		
+	}
+
+	@Override
+	@Transactional
+	public void deleteEmp(int theId) {
+		empDao.deletebyId(theId);
+		
+	}
+
 }
